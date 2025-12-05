@@ -1,0 +1,5 @@
+/**
+ * frontend service
+ */
+
+export default {};

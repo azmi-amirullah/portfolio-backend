@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "variables",
+  "collectionName": "organisations",
   "info": {
-    "singularName": "variable",
-    "pluralName": "variables",
-    "displayName": "Variable"
+    "singularName": "organisation",
+    "pluralName": "organisations",
+    "displayName": "Organisation"
   },
   "options": {
     "draftAndPublish": false
@@ -12,9 +12,6 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
-    },
-    "value": {
       "type": "string"
     }
   }

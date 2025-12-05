@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cashiers",
+  "info": {
+    "singularName": "cashier",
+    "pluralName": "cashiers",
+    "displayName": "Cashier"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "data": {
+      "type": "json"
+    },
+    "organisation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organisation.organisation"
+    }
+  }
+}
