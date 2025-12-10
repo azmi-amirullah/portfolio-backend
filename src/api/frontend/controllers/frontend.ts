@@ -67,10 +67,11 @@ export default {
           const availableStock = totalStock - sold;
 
           return {
-            id: productName, // Use key as ID
-            name: productName, // Use key as Name
+            id: productName,
+            name: productName,
             barcode: productInfo.barcode || '',
             price: productInfo.price || 0,
+            buyPrice: productInfo.buyPrice || 0,
             sold: sold,
             stock: productStock,
             availableStock: availableStock,
