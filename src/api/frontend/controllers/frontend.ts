@@ -96,6 +96,12 @@ export default {
       const { product } = ctx.request.body;
       if (!product || !product.name)
         return ctx.badRequest('Product name is required');
+      if (
+        product.price === undefined ||
+        product.price === null ||
+        product.price === ''
+      )
+        return ctx.badRequest('Sell price is required');
 
       const user = await strapi
         .documents('plugin::users-permissions.user')
@@ -172,6 +178,12 @@ export default {
       const { oldName, product } = ctx.request.body;
       if (!oldName || !product || !product.name)
         return ctx.badRequest('Invalid data');
+      if (
+        product.price === undefined ||
+        product.price === null ||
+        product.price === ''
+      )
+        return ctx.badRequest('Sell price is required');
 
       const user = await strapi
         .documents('plugin::users-permissions.user')
