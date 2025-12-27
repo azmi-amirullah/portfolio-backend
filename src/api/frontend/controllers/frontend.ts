@@ -75,10 +75,11 @@ export default {
             sold: sold,
             stock: productStock,
             availableStock: availableStock,
+            createdAt: productInfo.createdAt || null,
+            lastEditAt: productInfo.lastEditAt || null,
           };
         }
       );
-      console.log(productsArray);
       return {
         products: productsArray,
       };
@@ -142,12 +143,15 @@ export default {
       }
 
       // Remove id and name from storage, use key as ID/Name
-      const { id, name, ...productDataStored } = product;
+      const { id, name, createdAt, lastEditAt, ...productDataStored } = product;
+      const now = new Date().toISOString();
 
       productsData[product.name] = {
         ...productDataStored,
         sold: 0,
         stock: product.stock || [],
+        createdAt: now,
+        lastEditAt: now,
       };
 
       await strapi.documents('api::cashier.cashier').update({
@@ -219,17 +223,23 @@ export default {
       // This ensures the 'sold' count is read-only and managed solely by the backend/sales logic
       const soldCount = productsData[oldName].sold || 0;
 
+      // Preserve createdAt from original BEFORE any deletion
+      const originalCreatedAt =
+        productsData[oldName]?.createdAt || new Date().toISOString();
+
       // Remove old entry if name changed
       if (oldName !== product.name) {
         delete productsData[oldName];
       }
 
       // Remove id and name from storage, use key as ID/Name
-      const { id, name, ...productDataStored } = product;
+      const { id, name, createdAt, lastEditAt, ...productDataStored } = product;
 
       productsData[product.name] = {
         ...productDataStored,
         sold: soldCount, // Explicitly overwrite with preserved value
+        createdAt: originalCreatedAt,
+        lastEditAt: new Date().toISOString(),
       };
 
       await strapi.documents('api::cashier.cashier').update({
